@@ -1,0 +1,7 @@
+<!-- insert_bottom '[data-hook="admin_tabs"]' -->
+
+<% if can? :admin, :cms %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree Spree.t(:cms), icon: "edit", sub_menu: "cms", url: "#sidebar-cms" %>
+  </ul>
+<% end %>

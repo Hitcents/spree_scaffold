@@ -37,13 +37,18 @@ module SpreeScaffold
       end
 
       def create_locale
-        %w(en it).each do |locale|
+        %w(en).each do |locale|
           template "locales/#{locale}.yml", "config/locales/#{locale}_#{plural_name}.yml"
         end
       end
 
-      def create_deface_override
-        template 'overrides/add_to_admin_menu.html.erb.deface', "app/overrides/spree/admin/shared/_menu/add_spree_#{plural_name}.html.erb.deface"
+      def create_deface_override_for_cms_menu
+        copy_file 'overrides/add_cms_to_main_menu.html.erb.deface', 'app/overrides/spree/layouts/admin/add_cms_to_main_menu.html.erb.deface'
+        copy_file 'views/spree/admin/shared/sub_menu/_cms.html.erb', 'app/views/spree/admin/shared/sub_menu/_cms.html.erb'
+      end
+
+      def create_deface_override_for_cms_item
+        template 'overrides/add_to_admin_menu.html.erb.deface', "app/overrides/spree/admin/shared/sub_menu/_cms/add_spree_#{plural_name}.html.erb.deface"
       end
 
       def create_routes
