@@ -6,6 +6,26 @@
   <%%= button_link_to Spree.t(:new_<%= singular_name %>), new_object_url, class: 'btn-success', icon: 'add', id: 'admin_new_<%= singular_name %>_link' %>
 <%% end %>
 
+<%% content_for :table_filter do %>
+  <div data-hook="admin_<%= plural_name %>_sidebar">
+
+    <%%= search_form_for [:admin, @search] do |f| %>
+      <%%- locals = {:f => f} %>
+      <div data-hook="admin_<%= plural_name %>_index_search" class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%%= f.label :<%= (attributes.first.name + '_cont').to_sym %>, Spree.t(:<%= attributes.first.name %>) %>
+            <%%= f.text_field :<%= (attributes.first.name + '_cont').to_sym %>, :size => 15, class: "form-control js-quick-search-target" %>
+          </div>
+        </div>
+      </div>
+      <div data-hook="admin_<%= plural_name %>_index_search_buttons" class="form-actions">
+        <%%= button Spree.t(:search), 'search' %>
+      </div>
+    <%% end %>
+  </div>
+<%% end %>
+
 <% if sortable? -%>
 <table class="index sortable" id="listing_<%= plural_name %>" data-hook data-sortable-link="<%%= <%= "update_positions_admin_#{plural_name}_url" %> %>">
 <% else -%>
