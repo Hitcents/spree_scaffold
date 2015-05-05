@@ -3,21 +3,14 @@
 <%% end %>
 
 <%% content_for :page_actions do %>
-  <li>
-    <%%= button_link_to Spree.t(:back_to_<%= plural_name %>_list), collection_url, icon: 'arrow-left' %>
-  </li>
+  <%%= button_link_to Spree.t(:back_to_<%= plural_name %>_list), collection_url, icon: 'arrow-left' %>
 <%% end %>
 
-<div data-hook="admin_<%= singular_name %>_edit_form_header">
-  <%%= render 'spree/shared/error_messages', target: @<%= singular_name %> %>
-</div>
+<%%= render partial: 'spree/admin/shared/error_messages', locals: { target: @<%= singular_name %> } %>
 
-<div data-hook="admin_<%= singular_name %>_edit_form">
-  <%%= form_for [:admin, @<%= singular_name %>] do |f| %>
-    <%%= render 'form', f: f %>
-
-    <div data-hook="admin_<%= singular_name %>_edit_form_buttons">
-      <%%= render 'spree/admin/shared/edit_resource_links' %>
-    </div>
-  <%% end %>
-</div>
+<%%= form_for [:admin, @<%= singular_name %>], html: { multipart: true } do |f| %>
+  <fieldset>
+    <%%= render partial: 'form', locals: { f: f} %>
+    <%%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<%% end %>
