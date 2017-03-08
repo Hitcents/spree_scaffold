@@ -11,7 +11,7 @@ Installation
 Add this line to your application's Gemfile:
 ```ruby
 group :development do
-  gem 'spree_scaffold', github: 'freego/spree_scaffold', branch: '2-X-stable'
+  gem 'spree_scaffold', github: 'freego/spree_scaffold', branch: '3-2-stable'
 end
 ```
 
